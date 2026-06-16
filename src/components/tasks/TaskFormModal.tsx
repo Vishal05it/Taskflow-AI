@@ -215,7 +215,6 @@ export function TaskFormModal({
           label="Due date"
           name="dueDate"
           type="date"
-          className="dark:text-black dark:bg-white"
           value={form.dueDate}
           onChange={(e) =>
             setForm((prev) => ({ ...prev, dueDate: e.target.value }))
