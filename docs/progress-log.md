@@ -29,3 +29,9 @@ Ready for testing and debugging.
 ### Current Status
 
 Core authentication and user account management features are now substantially complete. The application is progressing toward a production-ready Mini SaaS experience.
+
+### Deployment Status
+
+The application remains continuously deployed on Vercel throughout development.
+
+Each major feature addition is verified in both local and production environments to ensure deployment stability and consistent behaviour.
