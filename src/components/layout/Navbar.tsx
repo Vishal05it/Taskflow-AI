@@ -29,9 +29,12 @@ export function Navbar() {
         <div className="flex items-center gap-3">
           <ThemeToggle />
           {user && (
-            <span className="hidden text-sm text-slate-600 dark:text-slate-300 sm:inline">
+            <Link
+              href="/dashboard/profile"
+              className="hidden text-sm font-medium text-slate-600 hover:text-brand-600 dark:text-slate-300 dark:hover:text-brand-400 sm:inline"
+            >
               {user.name}
-            </span>
+            </Link>
           )}
           <Button variant="secondary" size="sm" onClick={handleLogout} isLoading={isLoggingOut}>
             Log out

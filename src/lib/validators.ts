@@ -35,6 +35,25 @@ export const aiSuggestSchema = z.object({
   title: z.string().trim().min(1, "Title is required").max(200),
 });
 
+export const forgotPasswordRequestSchema = z.object({
+  email: z.string().trim().toLowerCase().email("Enter a valid email address"),
+});
+
+export const resetPasswordSchema = z.object({
+  email: z.string().trim().toLowerCase().email("Enter a valid email address"),
+  otp: z
+    .string()
+    .trim()
+    .length(5, "Enter the 5-digit code")
+    .regex(/^\d{5}$/, "Code must be 5 digits"),
+  newPassword: z.string().min(6, "Password must be at least 6 characters").max(72),
+});
+
+export const updateProfileSchema = z.object({
+  name: z.string().trim().min(2, "Name must be at least 2 characters").max(80),
+  email: z.string().trim().toLowerCase().email("Enter a valid email address"),
+});
+
 /** Flattens the first zod issue per field into a simple { field: message } map for API responses. */
 export function flattenZodErrors(error: z.ZodError): Record<string, string> {
   const fieldErrors: Record<string, string> = {};

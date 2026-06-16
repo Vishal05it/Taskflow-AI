@@ -13,7 +13,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="flex flex-col gap-1">
         {label && (
-          <label htmlFor={inputId} className="text-sm font-medium text-slate-700 dark:text-slate-300">
+          <label
+            htmlFor={inputId}
+            className="text-sm font-medium text-slate-700 dark:text-slate-300"
+          >
             {label}
           </label>
         )}
@@ -27,14 +30,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             error
               ? "border-red-400 focus:ring-red-500 focus:border-red-500"
               : "border-slate-300 dark:border-slate-700",
-            className
+            className,
           )}
           {...props}
         />
         {error && <p className="text-xs text-red-500">{error}</p>}
       </div>
     );
-  }
+  },
 );
 
 Input.displayName = "Input";
