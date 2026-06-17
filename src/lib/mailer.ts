@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 
-let cachedTransporter: ReturnType<typeof nodemailer.createTransport> | null = null;
+let cachedTransporter: ReturnType<typeof nodemailer.createTransport> | null =
+  null;
 
 function getTransporter() {
   const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS } = process.env;
@@ -34,12 +35,13 @@ export async function sendOtpEmail(to: string, otp: string): Promise<void> {
 
   const from = process.env.SMTP_FROM || process.env.SMTP_USER;
 
-  await transporter.sendMail({
-    from: `TaskFlow AI <${from}>`,
-    to,
-    subject: "Your TaskFlow AI password reset code",
-    text: `Your password reset code is ${otp}. It expires in 2 minutes. If you didn't request this, you can safely ignore this email.`,
-    html: `
+  await transporter.sendMail(
+    {
+      from: `TaskFlow AI <${from}>`,
+      to,
+      subject: "Your TaskFlow AI password reset code",
+      text: `Your password reset code is ${otp}. It expires in 2 minutes. If you didn't request this, you can safely ignore this email.`,
+      html: `
       <div style="font-family: sans-serif; max-width: 480px; margin: 0 auto;">
         <h2 style="color: #4350d4;">TaskFlow AI</h2>
         <p>Use the code below to reset your password. It expires in <strong>2 minutes</strong>.</p>
@@ -47,5 +49,11 @@ export async function sendOtpEmail(to: string, otp: string): Promise<void> {
         <p style="color: #64748b; font-size: 13px;">If you didn't request this, you can safely ignore this email.</p>
       </div>
     `,
-  });
+    },
+    (err, info) => {
+      if (err) {
+        console.log(`Error sending the mail : `, err);
+      } else console.log(`Mail sent successfully`, info);
+    },
+  );
 }
